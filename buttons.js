@@ -105,11 +105,12 @@ function infoButtonPressed() {
 function setUpShareButtons() {
     document.getElementById("share-site-button").addEventListener("click", async () => {
         let url = new URL(window.location);
+        url.search = '';  // Clear all URL search parameters
 
         let shareData = {
             title: "BINGO",
             text: "A fun party game that combines prediction, observation and playful interaction.",
-            url: url.hostname + url.pathname,
+            url: url,
         };
 
         try {
