@@ -8,8 +8,12 @@
     "background_color": "#0D3B66",
     "icons": [
         {
-            "src": "BingoFavicon.png",
-            "sizes": "72x72 96x96 128x128 256x256 512x512"
+            "src": "favicons/small.png",
+            "sizes": "32x32 48x48"
+        },
+        {
+            "src": "favicons/large.png",
+            "sizes": "64x64 72x72 96x96 128x128 256x256 512x512"
         }
     ]
 }
