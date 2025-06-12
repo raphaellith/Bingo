@@ -1,5 +1,5 @@
 /*
-Handles progressive web app installation instructions, which vary across devices and browsers as follows:
+Handles progressive web app installation instructions, which vary across devices and browsers as described below. No instructions should be displayed if the page is run already as a PWA.
 
 
 1. IN SUPPORTED BROWSERS AND DEVICES
@@ -23,6 +23,11 @@ This works in the majority of browsers and devices, with notable exceptions list
 3. ON iOS DEVICES
 
 "To install the BINGO app on this device, please tap Share and select Add to Home Screen."
+
+
+4. WHEN VIEWED IN PWA
+
+"Looks like you've already installed the app &mdash; brilliant!"
 */
 
 
@@ -31,6 +36,11 @@ function isIOS() {  // Returns whether iOS is being used
     
     // Check for iOS devices
     return /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+}
+
+
+function isRunAsPWA() {  // Returns whether pge is run as a PWA instead of in browser
+    return window.matchMedia('(display-mode: standalone)').matches;
 }
 
 
@@ -45,6 +55,13 @@ function initInstallationInstructions() {
     let installInstructionsForUnsupportedBrowsersDesktopOrAndroid = document.getElementById("install-instructions-for-unsupported-browsers-desktop-or-android");
 
     let installInstructionsForIOS = document.getElementById("install-instructions-for-ios");
+
+    let alreadyInstalledMessage = document.getElementById("already-installed-message");
+
+    if (isRunAsPWA()) {
+        alreadyInstalledMessage.hidden = false;
+        return;
+    }
 
     if (isIOS()) {
         installInstructionsForIOS.hidden = false;
