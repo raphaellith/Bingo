@@ -1,0 +1,15 @@
+{
+    "name": "Bingo",
+    "short_name": "Bingo",
+    "description": "A game that combines prediction, observation and playful mischief.",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#0D3B66",
+    "background_color": "#0D3B66",
+    "icons": [
+        {
+            "src": "BingoFavicon.png",
+            "sizes": "72x72 96x96 128x128 256x256 512x512"
+        }
+    ]
+}
