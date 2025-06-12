@@ -109,6 +109,11 @@ body {
     filter: saturate(0.2);
 }
 
+#info-button .material-symbols-outlined {
+    vertical-align: bottom;
+    font-size: 4vmin;
+}
+
 #bingo-content {
     /* Second row of the bingo-board's grid */
     grid-row: 2/3;
