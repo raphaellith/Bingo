@@ -164,7 +164,7 @@ body {
     background-position: center;
 }
 
-.editable-cell {
+.editable-cell-content {
     /* filter: brightness(0.8); */
     animation-name: textPop;
     animation-duration: 1s;

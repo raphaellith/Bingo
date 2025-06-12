@@ -45,9 +45,9 @@ function editButtonPressed() {
 
     let shuffleAndRestartButton = document.getElementById("shuffle-and-restart-button");
 
-    for (let cell of document.getElementsByClassName("bingo-cell")) {
-        cell.contentEditable = editMode ? "true" : "false";
-        cell.classList.toggle("editable-cell");
+    for (let cellContent of document.getElementsByClassName("bingo-cell-content")) {
+        cellContent.contentEditable = editMode ? "true" : "false";
+        cellContent.classList.toggle("editable-cell");
         shuffleAndRestartButton.classList.toggle("invalid-button");
     }
 
