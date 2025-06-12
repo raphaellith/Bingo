@@ -1,0 +1,251 @@
+:root {
+    /* https://coolors.co/palette/0d3b66-faf0ca-f4d35e-ee964b-f95738 */
+    --gridLen: 5;
+    --theme-color: #0D3B66;
+    --marked-cell-color: #FCA08E;
+    /* --button-color: #3f8252; */
+    /* --button-color: #4d91d5; */
+    --button-color: #3376b6;
+    --bingoed-cell-color: #F4D35E;
+    --white: #f8f8ff;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background-color: color-mix(in srgb, var(--theme-color), white 40%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#content-wrapper {
+    /* Take up all screen space */
+    width: 100vw;
+    height: 100vh;
+
+    /* To center bingo board */
+    position: relative;
+}
+
+#bingo-board {
+    /* Square of maximum possible size without overflowing */
+    width: 100vmin;
+    height: 100vmin;
+
+    /* Centered */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Grid layout */
+    display: grid;
+    grid-template-rows: 0.4fr 5fr;
+
+    background-color: var(--theme-color);
+    border: var(--theme-color) solid 10px;
+    border-radius: 20px;
+
+    /* box-shadow: 8px 8px 3px 3px color-mix(in srgb, var(--theme-color), black 40%); */
+}
+
+#bingo-heading {
+    /* First row of bingo-board's grid */
+    grid-row: 1/2;
+
+    /* Grid layout */
+    display: grid;
+    grid-template-columns: 2fr 3fr;  /* Title + buttons */
+}
+
+#bingo-title {
+    /* First column of bingo-heading's grid */
+    grid-column: 1/2;
+
+    font-size: 10vmin;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--white);
+}
+
+#buttons {
+    /* Second column of bingo-heading's grid */
+    grid-column: 2/3;
+
+    /* Grid layout */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  /* 3 buttons */
+}
+
+.button {
+    margin: 2vmin;
+
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3vmin;
+
+    background-color: var(--button-color);
+    border: none;
+    border-radius: 1vmin;
+
+    color: var(--white);
+
+    filter: saturate(1);  /* Set to 1 in normal conditions and 0.2 when button is invalid */
+
+    transition: filter 0.3s;
+}
+
+.invalid-button {
+    filter: saturate(0.2);
+}
+
+#bingo-content {
+    /* Second row of the bingo-board's grid */
+    grid-row: 2/3;
+    position: relative;
+}
+
+#bingo-grid {
+    /* Take up all available space */
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    /* Grid layout */
+    display: grid;
+    grid-template-columns: repeat(var(--gridLen), 1fr);
+    grid-template-rows: repeat(var(--gridLen), 1fr);
+}
+
+.bingo-cell {
+    border: solid var(--theme-color) 2px;
+    border-radius: 5px;
+    padding: 0.5vmin;
+
+    /*
+    Create a background image like so: 
+    
+     ---
+    |   |    COLOR FOR BINGOED CELLS
+     ---
+    |   |    VERTICAL GRADIENT
+     ---
+    |   |    COLOR FOR MARKED CELLS
+     ---
+    |   |    VERTICAL GRADIENT
+     ---
+    |   |    COLOR FOR UNMARKED CELLS
+     ---
+
+    This facilitates transitions between different background colors, the choice of which is determined by background-position.
+    */
+    background-size: 100% 500%;
+    background-image: linear-gradient(to bottom, var(--bingoed-cell-color) 20%, var(--marked-cell-color) 40%, var(--marked-cell-color) 60%, var(--white) 80%);
+    background-position: bottom;
+
+    /* Brightness set to 1 (practically no filter) in normal conditions and is reduced when the cell is editable */ 
+    /* filter: brightness(1); */
+
+    transition: background-position 0.3s, filter 0.3s;
+}
+
+.marked-cell {
+    background-position: center;
+}
+
+.editable-cell {
+    /* filter: brightness(0.8); */
+    animation-name: textPop;
+    animation-duration: 1s;
+}
+
+@keyframes textPop {
+    0% {color: black;}
+    50% {color: var(--button-color);}
+    75% {color: var(--button-color);}
+    100% {color: black;}
+}
+
+.bingoed-cell {
+    background-position: top;
+}
+
+.bingo-cell-content {
+    /* Centered vertically */
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Text centered */
+    text-align: center;
+
+    font-size: 3vmin;
+}
+
+#info-box {
+    /* Covers entirety of bingo grid */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    padding: 3vmin;
+    overflow-y: scroll;
+
+    background-color: color-mix(in srgb, black 92.5%, transparent);
+    color: var(--white);
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;  /* When the box is invisible, allow cursor to click elements under it*/
+
+    font-size: 3vmin;
+}
+
+#info-box > h3 {
+    font-size: 5vmin;
+    margin-top: 1.5em;
+}
+
+#info-box > ol > li { 
+    margin-bottom: 2vmin;  
+}
+
+#share-buttons {
+    /* Centered */
+    margin: auto;
+
+    width: 80%;
+    height: 5vmin;
+
+    /* Grid display - two buttons side by side */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8vmin;
+}
+
+.share-button {
+    padding: 3vmin;
+
+    background-color: var(--button-color);
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 3vmin;
+}

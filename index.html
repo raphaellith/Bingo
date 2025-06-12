@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>BINGO</title>
+        <link rel="stylesheet" href="style.css">
+
+        <!-- https://fonts.google.com/specimen/Barlow+Condensed -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+        <!-- Material Symbols -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,0&icon_names=info" />
+
+        <!-- Confetti -->
+        <!-- https://www.npmjs.com/package/canvas-confetti -->
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    </head>
+
+    <body>
+        <div id="content-wrapper">
+            <div id="bingo-board">
+                <div id="bingo-heading">
+                    <div id="bingo-title">
+                        BINGO
+                    </div>
+
+                    <div id="buttons">
+                        <button id="edit-button" class="button" onclick="editButtonPressed()">
+                            <div style="display: block" id="edit-button-edit-message">EDIT</div>
+                            <div style="display: none" id="edit-button-save-message">DONE</div>
+                        </button>
+
+                        <button id="shuffle-and-restart-button" class="button" onclick="shuffleAndRestartButtonPressed()">
+                            SHUFFLE
+                        </button>
+
+                        <button id="info-button" class="button" onclick="infoButtonPressed()">  
+                            <span class="material-symbols-outlined" style="vertical-align: bottom; font-size: 4vmin;">info</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="bingo-content">
+                    <div id="bingo-grid">
+                        <!-- Cells go here, added by JS -->
+                    </div>
+                    <div id="info-box">
+                        <h3 style="margin-top: 0;">How to Play</h3>
+
+                        <p>BINGO is a game that combines prediction, observation and playful mischief. Follow these steps to play:</p>
+
+                        <ol>
+                            <li>
+                                <b>Customise your board.</b><br>
+                                Press the <b>EDIT</b> button. In each cell of the Bingo board, write down an action or phrase you think your friends are likely to do or say &mdash; these could be catchphrases, habits, or funny quirks.
+                            </li>
+                            <li>
+                                <b>Mark your observations.</b><br>
+                                During a party, meal or event, keep an eye out for these actions. Whenever you see one performed, tap on the corresponding cell to mark it.
+                            </li>
+                            <li>
+                                <b>Aim for BINGO!</b><br>
+                                Your objective is to achieve BINGO by marking five cells in a row, column or diagonal. If you want to mix things up, press the <b>SHUFFLE</b> button. This will randomly rearrange the cells and automatically clear any previously marked cells.
+                            </li>
+                        </ol>
+
+                        <p>To close this window, press on the <span class="material-symbols-outlined" style="vertical-align: bottom; font-size: inherit;">info</span> button again.</p>
+
+                        <h3>Share this project</h3>
+
+                        <div id="share-buttons" style="margin-bottom: 4em;">
+                            <button class="share-button" id="share-site-button">
+                                <b>Share this site</b><br>
+                                with friends
+                            </button>
+                            <button class="share-button" id="share-board-url-button">
+                                <b>Share this board</b><br>
+                                as a custom URL
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="buttons.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
