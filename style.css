@@ -223,6 +223,13 @@ body {
     margin-bottom: 2vmin;  
 }
 
+#info-box .material-symbols-outlined {
+    margin-left: 0.2ch;
+    margin-right: 0.2ch;
+    font-size: 2.75vmin;
+    vertical-align: baseline;
+}
+
 #share-buttons {
     /* Centered */
     margin: auto;

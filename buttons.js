@@ -134,37 +134,4 @@ function setUpShareButtons() {
     });
 }
 
-let deferredEvent;      
-function setUpInstallationButton() {
-    let installPwaParagraph = document.getElementById("install-pwa-paragraph");
-
-    window.addEventListener(
-        'beforeinstallprompt',
-        (event) => {
-            // Prevent the browser from displaying the default install dialog
-            event.preventDefault();
-
-            // Show paragraph describing installation and containing installation button
-            installButton.removeAttribute("hidden");
-
-            // Store the event so it can be triggered later when the user clicks the installation button
-            deferredEvent = event;
-        }
-    );
-
-    let installPwaButton = document.getElementById("install-pwa-button");
-
-    installPwaButton.addEventListener(
-        'click',
-        () => {
-            // if the deferredEvent exists, call its prompt method to display the install dialog
-            if (deferredEvent) {
-                deferredEvent.prompt();
-            }
-        }
-    );
-}
-
-
-setUpInstallationButton();
 setUpShareButtons();
