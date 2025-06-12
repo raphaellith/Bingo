@@ -56,6 +56,10 @@ function editButtonPressed() {
 
     editButtonEditMessage.style.display = editMode ? "none" : "block";
     editButtonSaveMessage.style.display = editMode ? "block" : "none";
+
+    if (!editMode) {  // Finished editing
+        saveCurrBoardToLocalStorage();
+    }
 }
 
 function shuffleAndRestartButtonPressed() {
@@ -98,19 +102,6 @@ function infoButtonPressed() {
 }
 
 
-function getThisBoardURL() {
-    let url = new URL(window.location);
-
-    for (let y = 0; y < gridLen; y++) {
-        for (let x = 0; x < gridLen; x++) {
-            url.searchParams.set(y * gridLen + x, document.getElementById(`cell${x}${y}-content`).textContent);
-        }
-    }
-
-    return url;
-}
-
-
 function setUpShareButtons() {
     document.getElementById("share-site-button").addEventListener("click", async () => {
         let url = new URL(window.location);
@@ -132,7 +123,7 @@ function setUpShareButtons() {
         let shareData = {
             title: "BINGO",
             text: "Play my customised BINGO board!",
-            url: getThisBoardURL(),
+            url: convertCurrBoardToURL(),
         };
         try {
             await navigator.share(shareData);
