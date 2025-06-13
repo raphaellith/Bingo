@@ -8,6 +8,22 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
 
+        <!-- Register the app's service worker. -->
+        <script>
+        if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js").then(
+                (registration) => {
+                    console.log("Service worker registration successful:", registration);
+                },
+                (error) => {
+                    console.error(`Service worker registration failed: ${error}`);
+                },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+        </script>
+
         <!-- Manifest file (for PWA usage) -->
         <link rel="manifest" href="bingo-manifest.json" />
 
@@ -125,7 +141,7 @@
                 </div>
             </div>
         </div>
-
+        
         <script src="buttons.js"></script>
         <script src="appInstallation.js"></script>
         <script src="index.js"></script>

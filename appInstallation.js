@@ -32,10 +32,16 @@ This works in the majority of browsers and devices, with notable exceptions list
 
 
 function isIOS() {  // Returns whether iOS is being used
-    const userAgent = navigator.userAgent || window.opera;
-    
-    // Check for iOS devices
-    return /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+    return [
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+    ].includes(navigator.platform)  // Deprecated, but no alternative
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
 
 
