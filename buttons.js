@@ -47,7 +47,7 @@ function editButtonPressed() {
 
     for (let cellContent of document.getElementsByClassName("bingo-cell-content")) {
         cellContent.contentEditable = editMode ? "true" : "false";
-        cellContent.classList.toggle("editable-cell");
+        cellContent.classList.toggle("editable-cell-content");
         shuffleAndRestartButton.classList.toggle("invalid-button");
     }
 

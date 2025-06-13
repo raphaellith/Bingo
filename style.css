@@ -159,9 +159,6 @@ body {
     background-image: linear-gradient(to bottom, var(--bingoed-cell-color) 20%, var(--marked-cell-color) 40%, var(--marked-cell-color) 60%, var(--white) 80%);
     background-position: bottom;
 
-    /* Brightness set to 1 (practically no filter) in normal conditions and is reduced when the cell is editable */ 
-    /* filter: brightness(1); */
-
     transition: background-position 0.3s, filter 0.3s;
 }
 
@@ -170,7 +167,6 @@ body {
 }
 
 .editable-cell-content {
-    /* filter: brightness(0.8); */
     animation-name: textPop;
     animation-duration: 1s;
 }
