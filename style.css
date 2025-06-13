@@ -3,11 +3,10 @@
     --gridLen: 5;
     --theme-color: #0D3B66;
     --marked-cell-color: #FCA08E;
-    /* --button-color: #3f8252; */
-    /* --button-color: #4d91d5; */
     --button-color: #3376b6;
     --bingoed-cell-color: #F4D35E;
     --white: #f8f8ff;
+    --transition-duration: 0.3s;
 }
 
 html, body {
@@ -102,7 +101,7 @@ body {
 
     filter: saturate(1);  /* Set to 1 in normal conditions and 0.2 when button is invalid */
 
-    transition: filter 0.3s;
+    transition: filter var(--transition-duration);
 }
 
 .invalid-button {
@@ -159,7 +158,7 @@ body {
     background-image: linear-gradient(to bottom, var(--bingoed-cell-color) 20%, var(--marked-cell-color) 40%, var(--marked-cell-color) 60%, var(--white) 80%);
     background-position: bottom;
 
-    transition: background-position 0.3s, filter 0.3s;
+    transition: background-position var(--transition-duration), filter var(--transition-duration);
 }
 
 .marked-cell {
@@ -208,7 +207,7 @@ body {
     color: var(--white);
     border-radius: 5px;
     opacity: 0;
-    transition: opacity 0.15s;
+    transition: opacity var(--transition-duration);
     pointer-events: none;  /* When the box is invisible, allow cursor to click elements under it*/
 
     font-size: 3vmin;
