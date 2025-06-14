@@ -23,9 +23,9 @@ let defaultCellContents = shuffled([
     "Consults ChatGPT",
     "Asks someone to repeat what they said",
     "Facepalms",
-    "Laughs for over 10 seconds",
+    "Laughs for over 5 seconds",
     "Roasts someone",
-    "Records video on phone",
+    "Records video",
     "Grosses everyone out"
 ]);
 
