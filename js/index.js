@@ -25,7 +25,7 @@ let defaultCellContents = shuffled([
     "Facepalms",
     "Laughs for over 10 seconds",
     "Roasts someone",
-    "Records video",
+    "Records video on phone",
     "Grosses everyone out"
 ]);
 
