@@ -8,7 +8,7 @@ const assets = [
     "/index.html",
     "/favicons/large.png",
     "/js/app-register.js",
-    "/js/install-instructions.js",
+    "/js/info-box.js",
     "/js/buttons.js",
     "/js/index.js", 
     "/style.css",

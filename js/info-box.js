@@ -1,5 +1,5 @@
 /*
-Handles progressive web app installation instructions, which vary across devices and browsers as described below. No instructions should be displayed if the page is run already as a PWA.
+Handles the info box content, including the progressive web app installation instructions, which vary across devices and browsers as described below. No instructions should be displayed if the page is run already as a PWA.
 
 
 1. IN SUPPORTED BROWSERS AND DEVICES
@@ -104,4 +104,13 @@ function initInstallationInstructions() {
 }
 
 
+function initAppSpecificMessages() {
+    let isPWA = isRunAsPWA();
+    for (let element of document.getElementsByClassName("app-specific-message")) {
+        element.style.display = isPWA ? "block" : "none";
+    }
+}
+
+
 initInstallationInstructions();
+initAppSpecificMessages();
