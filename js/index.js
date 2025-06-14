@@ -14,7 +14,7 @@ let defaultCellContents = shuffled([
     "Baffled by party game rules",
     "Uses word with 12 or more letters",
     "Misuses word or slang",
-    "Curses",
+    "Swears",
     "Runs",
     "Uses stationery",
     "References obscure media",
