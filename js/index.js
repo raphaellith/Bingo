@@ -38,10 +38,14 @@ function shuffled(list) {
 }
 
 
-function readCellContentsFromURL() {
+function readCellDataFromURL() {
     /* If info from URL is insufficient, null is returned */
 
-    let result = [];
+    let result = {
+        cellContents: [],
+        markedCells: []
+    };
+
     let urlParams = new URLSearchParams(window.location.search);
 
     for (let i = 0; i < numOfGridCells; i++) {
@@ -49,7 +53,7 @@ function readCellContentsFromURL() {
         if (cellContent == null) {
             return null;
         }
-        result.push(cellContent);
+        result.cellContents.push(cellContent);
     }
 
     return result;
@@ -70,7 +74,10 @@ function convertCurrBoardToURL() {
 
 
 function readCellContentsFromLocalStorage() {
-    let result = [];
+    let result = {
+        cellContents: [],
+        markedCells: []
+    };
 
     for (let y = 0; y < gridLen; y++) {
         for (let x = 0; x < gridLen; x++) {
@@ -78,8 +85,15 @@ function readCellContentsFromLocalStorage() {
             if (cellContent == null) {
                 return null;
             }
-            result.push(cellContent);
+            result.cellContents.push(cellContent);
         }
+    }
+
+    let markedCellsAsString = localStorage.getItem("marked-cells");
+    if (markedCellsAsString != null) {
+        result.markedCells = markedCellsAsString
+                            .split(",")
+                            .map(s => parseInt(s));
     }
     
     return result;
@@ -87,27 +101,41 @@ function readCellContentsFromLocalStorage() {
 
 
 function saveCurrBoardToLocalStorage() {
+    let markedCells = [];
+
     for (let y = 0; y < gridLen; y++) {
         for (let x = 0; x < gridLen; x++) {
             localStorage.setItem(`cell${x}${y}-content`, document.getElementById(`cell${x}${y}-content`).textContent);
+
+            if (document.getElementById(`cell${x}${y}`).classList.contains("marked-cell")) {
+                markedCells.push(y * gridLen + x);
+            }
         }
     }
+
+    localStorage.setItem("marked-cells", markedCells.join(","));
 }
 
 
-function getCellContents() {
+function getCellData() {
     /*
-    Returns the cell contents that the cells should be set to at the start of the game.
+    Returns the cell data for initialising cells at the start of the game.
     
-    The function starts by checking the URL. If the URL contains sufficient information needed to create a custom bingo board, those cell contents are returned.
+    The function starts by checking the URL. If the URL contains sufficient information needed to create a custom bingo board, it is used for initialisation.
 
-    Then, if window.localStorage contains cell contents stored from a previous session, those contents are returned.
+    Then, if window.localStorage contains cell contents stored from a previous session, those are returned.
 
     Finally, the default cell contents are returned.
+
+    The returned value is an object:
+    {
+        cellContents: [ ... ]  // list of strings
+        markedCells: [ ... ]  // list of integers from 0 to 24
+    }
     */
 
     // Check URL
-    let resultFromURL = readCellContentsFromURL();
+    let resultFromURL = readCellDataFromURL();
     if (resultFromURL != null) {
         return resultFromURL;
     }
@@ -119,16 +147,19 @@ function getCellContents() {
     }
 
     // If nothing works, return default
-    return defaultCellContents;
+    return {
+        cellContents: defaultCellContents,
+        markedCells: []
+    };
 }
 
 
 function init() {
     /*
-    Initialises the site by adding bingo cell elements and assigning their text content.
+    Initialises the site using the given bingo cell data (from URL/ from local storage/ by default).
     */
 
-    let bingoCellContents = getCellContents();
+    let bingoCellData = getCellData();
 
     let bingoGrid = document.getElementById("bingo-grid");
 
@@ -138,6 +169,9 @@ function init() {
 
             let newCell = document.createElement("div");
             newCell.classList.add("bingo-cell");
+            if (bingoCellData.markedCells.includes(i)) {
+                newCell.classList.add("marked-cell");
+            }
             newCell.contentEditable = "false";
             newCell.id = `cell${x}${y}`;
 
@@ -145,7 +179,7 @@ function init() {
             newCellContent.classList.add("bingo-cell-content");
             newCellContent.id = newCell.id + "-content";
 
-            newCellContent.textContent = bingoCellContents[i];
+            newCellContent.textContent = bingoCellData.cellContents[i];
             
             newCell.appendChild(newCellContent);
             newCell.onclick = function() {cellPressed(newCell);}

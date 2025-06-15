@@ -5,6 +5,7 @@ function cellPressed(cell) {
 
     // Toggle between marked & unmarked
     cell.classList.toggle("marked-cell");
+    saveCurrBoardToLocalStorage();
 
     // Check if bingo has been achieved
     let bingo = checkIfBingo();
@@ -87,6 +88,7 @@ function shuffleAndRestartButtonPressed() {
     }
 
     hasAchievedBingo = false;
+    saveCurrBoardToLocalStorage();
 }
 
 function infoButtonPressed() {
