@@ -187,6 +187,8 @@ function init() {
             bingoGrid.appendChild(newCell);
         }
     }
+
+    checkIfBingo();
 }
 
 
