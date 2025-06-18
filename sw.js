@@ -1,5 +1,5 @@
 // Name of cache storing static resources of the site
-const version = "v1.2";
+const version = "v1.3";
 const staticCacheName = `site-static-${version}`;
 
 // Assets/resources to be cached

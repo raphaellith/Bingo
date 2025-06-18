@@ -111,7 +111,6 @@ function setUpShareButtons() {
 
         let shareData = {
             title: "BINGO",
-            text: "A fun party game that combines prediction, observation and playful interaction.",
             url: url,
         };
 
@@ -125,7 +124,6 @@ function setUpShareButtons() {
     document.getElementById("share-board-url-button").addEventListener("click", async () => {
         let shareData = {
             title: "BINGO",
-            text: "Play my customised BINGO board!",
             url: convertCurrBoardToURL(),
         };
         try {
