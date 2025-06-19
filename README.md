@@ -4,8 +4,6 @@ A game that combines prediction, observation and playful mischief.
 
 This game is implemented as a progressive web app, meaning that it can be played both inside a browser and as a standalone app.
 
-Current version: V1.2.
-
 
 ## Future work
 
